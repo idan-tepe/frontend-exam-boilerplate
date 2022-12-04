@@ -46,8 +46,18 @@ function attachListeners() {
  * Complete the function below to get the exchange rate from the API
  */
 
-async function getExchangeRateFromApi(dateCode: string, currencyCode: string) {}
-
+async function getExchangeRateFromApi(dateCode: string, currencyCode: string) {
+  /* returns the value of the currency in the date that given
+   */
+  const response = await fetch(
+    exchangeRateEndpoint + `?rdate=${dateCode}&curr=${currencyCode}`
+  );
+  const ans = await response.json();
+  console.log(ans);
+  const toReturn = ans.CURRENCIES.CURRENCY.RATE;
+  return toReturn;
+}
+getExchangeRateFromApi("20211001", "01");
 /**
  * Complete the function below to get the data from the form,
  * send it to the API, present the result, and show/hide the spinner.
